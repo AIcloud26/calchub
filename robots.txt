@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://aicloud26.github.io/calcHub/sitemap.xml
+
+# Crawl-delay (optional, be nice to other sites)
+Crawl-delay: 1
