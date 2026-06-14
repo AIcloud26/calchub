@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Calculator - Days Between Dates | CalcHub</title>
+    <meta name="description" content="Free Date Calculator - Calculate the exact number of days, weeks, months, and years between two dates. Also shows working days and day of week information.">
+    
+    <meta property="og:title" content="Date Calculator - Days Between Dates">
+    <meta property="og:description" content="Calculate days between dates with precision.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicloud26.github.io/calcHub/calculator/date-difference-calculator.html">
+    
+    <link rel="canonical" href="https://aicloud26.github.io/calcHub/calculator/date-difference-calculator.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Date Calculator",
+        "description": "Calculate the difference between two dates.",
+        "url": "https://aicloud26.github.io/calcHub/calculator/date-difference-calculator.html",
+        "applicationCategory": "UtilityApplication"
+    }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header id="main-header"></header>
+    
+    <main class="flex-1">
+        <div class="container-custom py-4">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../category/math.html">Math</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="text-gray-700">Date Calculator</span>
+            </nav>
+        </div>
+        
+        <section class="section pt-0">
+            <div class="container-custom">
+                <div class="content-with-sidebar">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Date Calculator</h1>
+                        <p class="text-gray-600 mb-6">Calculate the exact difference between two dates in days, weeks, months, and years. Perfect for counting down to events or calculating durations.</p>
+                        
+                        <div class="calculator-tool">
+                            <div class="form-group">
+                                <label for="date-start" class="form-label">Start Date</label>
+                                <input type="date" id="date-start" class="form-input">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="date-end" class="form-label">End Date</label>
+                                <input type="date" id="date-end" class="form-input">
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-lg w-full" onclick="calculateDateDiff()">
+                                Calculate Difference
+                            </button>
+                            
+                            <div id="date-result" class="calculator-result" style="display: none;"></div>
+                        </div>
+                        
+                        <div class="ad-placeholder ad-placeholder-horizontal my-6" data-ad-slot="in-content-1"></div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Common Uses for Date Calculators</h2>
+                            <div class="prose prose-lg max-w-none text-gray-600">
+                                <ul>
+                                    <li><strong>Pregnancy countdown:</strong> Calculate how far along you are or your due date</li>
+                                    <li><strong>Project duration:</strong> Determine how long a project will take</li>
+                                    <li><strong>Contract periods:</strong> Calculate length of employment or subscriptions</li>
+                                    <li><strong>Age verification:</strong> Check exact age for legal purposes</li>
+                                    <li><strong>Event planning:</strong> Count down to weddings, vacations, or holidays</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">How to Use This Calculator</h2>
+                            <ol class="list-decimal list-inside space-y-3 text-gray-600">
+                                <li>Select your start date using the date picker</li>
+                                <li>Select your end date</li>
+                                <li>Click "Calculate Difference"</li>
+                                <li>View the complete breakdown including days, weeks, months, and years</li>
+                                <li>See working days count and day of week information</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        Does the calculator include the end date?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>The calculator shows the difference between the two dates (not including the end date in the count). For example, from Jan 1 to Jan 2 is 1 day.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        How accurate are the month and year calculations?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Our calculator shows exact years, months, and days. The "approximate months" shown uses a 30.44-day average, which is useful for quick estimates but may differ slightly from the exact calculation.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        How are working days calculated?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Working days (also called business days) exclude Saturdays and Sundays. Holidays are not subtracted as they vary by country and year.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <aside class="space-y-6">
+                        <div class="ad-placeholder ad-placeholder-sidebar" data-ad-slot="sidebar-1"></div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Related Calculators</h3>
+                            <div class="space-y-3">
+                                <a href="age-calculator.html" class="related-card">
+                                    <div class="related-icon">🎂</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Age Calculator</p>
+                                        <p class="text-xs text-gray-500">Find your exact age</p>
+                                    </div>
+                                </a>
+                                <a href="percentage-calculator.html" class="related-card">
+                                    <div class="related-icon">%</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Percentage Calculator</p>
+                                        <p class="text-xs text-gray-500">Calculate percentages</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="main-footer"></footer>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/calculators.js"></script>
+    <script>
+        // Set default dates
+        const today = new Date();
+        const nextWeek = new Date(today);
+        nextWeek.setDate(today.getDate() + 7);
+        
+        document.getElementById('date-start').value = today.toISOString().split('T')[0];
+        document.getElementById('date-end').value = nextWeek.toISOString().split('T')[0];
+    </script>
+</body>
+</html>

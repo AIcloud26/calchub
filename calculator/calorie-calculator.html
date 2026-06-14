@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Calculator - Daily Calorie Needs | CalcHub</title>
+    <meta name="description" content="Free Calorie Calculator - Calculate your daily calorie needs based on your age, gender, height, weight, and activity level. Also shows weight loss and weight gain targets.">
+    
+    <meta property="og:title" content="Calorie Calculator - Daily Calorie Needs">
+    <meta property="og:description" content="Calculate your daily calorie needs for weight loss, maintenance, or weight gain.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicloud26.github.io/calcHub/calculator/calorie-calculator.html">
+    
+    <link rel="canonical" href="https://aicloud26.github.io/calcHub/calculator/calorie-calculator.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Calorie Calculator",
+        "description": "Calculate daily calorie needs based on BMR and activity level.",
+        "url": "https://aicloud26.github.io/calcHub/calculator/calorie-calculator.html",
+        "applicationCategory": "HealthApplication"
+    }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header id="main-header"></header>
+    
+    <main class="flex-1">
+        <div class="container-custom py-4">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../category/health.html">Health</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="text-gray-700">Calorie Calculator</span>
+            </nav>
+        </div>
+        
+        <section class="section pt-0">
+            <div class="container-custom">
+                <div class="content-with-sidebar">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Calorie Calculator</h1>
+                        <p class="text-gray-600 mb-6">Calculate your daily calorie needs using the Mifflin-St Jeor equation. Find out how many calories you burn at rest and your total daily energy expenditure.</p>
+                        
+                        <div class="calculator-tool">
+                            <div class="mb-6">
+                                <label class="form-label">Unit System</label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn active" data-cal-unit="metric" onclick="switchCalorieUnit('metric')">Metric (kg/cm)</button>
+                                    <button type="button" class="toggle-btn" data-cal-unit="imperial" onclick="switchCalorieUnit('imperial')">Imperial (lbs/ft-in)</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="cal-gender" class="form-label">Gender</label>
+                                <select id="cal-gender" class="form-select">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="cal-age" class="form-label">Age (years)</label>
+                                <input type="number" id="cal-age" class="form-input" placeholder="e.g., 30" min="1" max="120">
+                            </div>
+                            
+                            <!-- Metric Inputs -->
+                            <div id="cal-metric-inputs">
+                                <div class="form-group">
+                                    <label for="cal-height-cm" class="form-label">Height (cm)</label>
+                                    <input type="number" id="cal-height-cm" class="form-input" placeholder="e.g., 175" min="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cal-weight-kg" class="form-label">Weight (kg)</label>
+                                    <input type="number" id="cal-weight-kg" class="form-input" placeholder="e.g., 70" min="1">
+                                </div>
+                            </div>
+                            
+                            <!-- Imperial Inputs -->
+                            <div id="cal-imperial-inputs" style="display: none;">
+                                <div class="form-group">
+                                    <label class="form-label">Height</label>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <input type="number" id="cal-height-ft" class="form-input" placeholder="Feet" min="1" max="9">
+                                        <input type="number" id="cal-height-in" class="form-input" placeholder="Inches" min="0" max="11">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cal-weight-lbs" class="form-label">Weight (lbs)</label>
+                                    <input type="number" id="cal-weight-lbs" class="form-input" placeholder="e.g., 154" min="1">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="cal-activity" class="form-label">Activity Level</label>
+                                <select id="cal-activity" class="form-select">
+                                    <option value="sedentary">Sedentary (little or no exercise)</option>
+                                    <option value="light">Lightly active (light exercise 1-3 days/week)</option>
+                                    <option value="moderate">Moderately active (moderate exercise 3-5 days/week)</option>
+                                    <option value="active">Active (hard exercise 6-7 days/week)</option>
+                                    <option value="very_active">Very active (very hard exercise, physical job)</option>
+                                </select>
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-lg w-full" onclick="calculateCalories()">
+                                Calculate Calories
+                            </button>
+                            
+                            <div id="calorie-result" class="calculator-result" style="display: none;"></div>
+                        </div>
+                        
+                        <div class="ad-placeholder ad-placeholder-horizontal my-6" data-ad-slot="in-content-1"></div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Understanding BMR and TDEE</h2>
+                            <div class="prose prose-lg max-w-none text-gray-600">
+                                <p><strong>BMR (Basal Metabolic Rate)</strong> is the number of calories your body burns at complete rest - just to keep your heart beating, lungs breathing, and organs functioning.</p>
+                                <p class="mt-4"><strong>TDEE (Total Daily Energy Expenditure)</strong> is your BMR multiplied by your activity level. This represents the total calories you burn in a day, including all activities.</p>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4 my-4">
+                                    <h3 class="font-semibold mb-2">Mifflin-St Jeor Equation</h3>
+                                    <p class="font-mono text-sm mb-2">Men: BMR = (10 × weight) + (6.25 × height) - (5 × age) + 5</p>
+                                    <p class="font-mono text-sm">Women: BMR = (10 × weight) + (6.25 × height) - (5 × age) - 161</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Activity Level Guide</h2>
+                            <div class="space-y-2 text-gray-600">
+                                <p><strong>Sedentary:</strong> Desk job, little to no exercise</p>
+                                <p><strong>Lightly active:</strong> Light exercise 1-3 days per week</p>
+                                <p><strong>Moderately active:</strong> Moderate exercise 3-5 days per week</p>
+                                <p><strong>Active:</strong> Hard exercise 6-7 days per week</p>
+                                <p><strong>Very active:</strong> Very hard exercise, physical job, or twice-daily training</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 info-box-warning info-box">
+                            <h3 class="font-semibold text-gray-800 mb-2">⚠️ Disclaimer</h3>
+                            <p class="text-gray-600">These calculations are estimates. Individual calorie needs vary based on genetics, metabolism, and other factors. Consult a healthcare provider or nutritionist for personalized advice.</p>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        How many calories should I eat to lose weight?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>A safe weight loss rate is 1-2 pounds per week, which requires a calorie deficit of about 500-1000 calories per day. Our calculator shows a -500 calorie target. Always consult a healthcare provider before starting any diet.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <aside class="space-y-6">
+                        <div class="ad-placeholder ad-placeholder-sidebar" data-ad-slot="sidebar-1"></div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Related Calculators</h3>
+                            <div class="space-y-3">
+                                <a href="bmi-calculator.html" class="related-card">
+                                    <div class="related-icon">⚖️</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">BMI Calculator</p>
+                                        <p class="text-xs text-gray-500">Body mass index</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="main-footer"></footer>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/calculators.js"></script>
+</body>
+</html>

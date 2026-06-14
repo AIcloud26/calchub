@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Calculator - Free Compound Growth Calculator | CalcHub</title>
+    <meta name="description" content="Free Investment Calculator - Calculate compound interest and project your investment growth over time. Includes monthly contributions and growth visualization.">
+    
+    <meta property="og:title" content="Investment Calculator - Free Compound Growth Calculator">
+    <meta property="og:description" content="Calculate compound interest and project your investment growth.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicloud26.github.io/calcHub/calculator/investment-calculator.html">
+    
+    <link rel="canonical" href="https://aicloud26.github.io/calcHub/calculator/investment-calculator.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Investment Calculator",
+        "description": "Calculate compound interest and project investment growth.",
+        "url": "https://aicloud26.github.io/calcHub/calculator/investment-calculator.html",
+        "applicationCategory": "FinanceApplication"
+    }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header id="main-header"></header>
+    
+    <main class="flex-1">
+        <div class="container-custom py-4">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../category/finance.html">Finance</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="text-gray-700">Investment Calculator</span>
+            </nav>
+        </div>
+        
+        <section class="section pt-0">
+            <div class="container-custom">
+                <div class="content-with-sidebar">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Investment Calculator</h1>
+                        <p class="text-gray-600 mb-6">Calculate compound interest and project your investment growth over time. See how your money can grow with regular contributions.</p>
+                        
+                        <div class="calculator-tool">
+                            <div class="form-group">
+                                <label for="invest-initial" class="form-label">Initial Investment ($)</label>
+                                <input type="number" id="invest-initial" class="form-input" placeholder="e.g., 10000" min="0" value="10000">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="invest-monthly" class="form-label">Monthly Contribution ($)</label>
+                                <input type="number" id="invest-monthly" class="form-input" placeholder="e.g., 500" min="0" value="500">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="invest-return" class="form-label">Annual Return Rate (%)</label>
+                                <input type="number" id="invest-return" class="form-input" placeholder="e.g., 7" step="0.1" min="0" value="7">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="invest-years" class="form-label">Time Period (Years)</label>
+                                <input type="number" id="invest-years" class="form-input" placeholder="e.g., 20" min="1" value="20">
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-lg w-full" onclick="calculateInvestment()">
+                                Calculate Investment
+                            </button>
+                            
+                            <div id="invest-result" class="calculator-result" style="display: none;"></div>
+                        </div>
+                        
+                        <div class="ad-placeholder ad-placeholder-horizontal my-6" data-ad-slot="in-content-1"></div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Understanding Compound Interest</h2>
+                            <div class="prose prose-lg max-w-none text-gray-600">
+                                <p>Compound interest is often called the "eighth wonder of the world" because it allows your money to grow exponentially over time. Unlike simple interest, compound interest is earned on both your initial investment and accumulated interest.</p>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4 my-4">
+                                    <h3 class="font-semibold mb-2">The Power of Compound Interest</h3>
+                                    <p class="text-sm">If you invest $10,000 at 7% annual return for 30 years:</p>
+                                    <p class="font-mono text-sm mt-2">Future Value = $10,000 × (1 + 0.07/12)^(12×30) = ~$76,123</p>
+                                    <p class="text-sm text-green-600 mt-2">That's 7.6x your original investment!</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">How to Use This Calculator</h2>
+                            <ol class="list-decimal list-inside space-y-3 text-gray-600">
+                                <li>Enter your initial investment amount (one-time deposit)</li>
+                                <li>Add your planned monthly contribution</li>
+                                <li>Enter your expected annual return rate (historical S&P 500 average is ~7%)</li>
+                                <li>Select your investment time horizon in years</li>
+                                <li>Click "Calculate Investment" to see your projected returns</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        What is a realistic expected return rate?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Historical average returns vary by investment type. The S&P 500 has averaged about 7% annually (adjusted for inflation) over long periods. Conservative investments like bonds may return 3-5%, while stocks may return 8-10%.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        Does this calculator account for inflation?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>No, this calculator shows nominal returns. To account for inflation, subtract the expected inflation rate (typically 2-3%) from your return rate to get a more realistic picture of purchasing power.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <aside class="space-y-6">
+                        <div class="ad-placeholder ad-placeholder-sidebar" data-ad-slot="sidebar-1"></div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Related Calculators</h3>
+                            <div class="space-y-3">
+                                <a href="retirement-calculator.html" class="related-card">
+                                    <div class="related-icon">🏖️</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Retirement Calculator</p>
+                                        <p class="text-xs text-gray-500">Plan for retirement</p>
+                                    </div>
+                                </a>
+                                <a href="compound-interest-calculator.html" class="related-card">
+                                    <div class="related-icon">📈</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Compound Interest</p>
+                                        <p class="text-xs text-gray-500">Pure compound growth</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="main-footer"></footer>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/calculators.js"></script>
+</body>
+</html>

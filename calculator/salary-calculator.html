@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator - Hourly, Weekly, Bi-weekly, Monthly | CalcHub</title>
+    <meta name="description" content="Free Salary Calculator - Convert annual salary to hourly, weekly, bi-weekly, and monthly rates. Includes estimated tax breakdown.">
+    
+    <meta property="og:title" content="Salary Calculator - Hourly, Weekly, Bi-weekly, Monthly">
+    <meta property="og:description" content="Convert annual salary to different pay periods and see tax breakdown.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicloud26.github.io/calcHub/calculator/salary-calculator.html">
+    
+    <link rel="canonical" href="https://aicloud26.github.io/calcHub/calculator/salary-calculator.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Salary Calculator",
+        "description": "Convert annual salary to different pay periods.",
+        "url": "https://aicloud26.github.io/calcHub/calculator/salary-calculator.html",
+        "applicationCategory": "FinanceApplication"
+    }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header id="main-header"></header>
+    
+    <main class="flex-1">
+        <div class="container-custom py-4">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../category/finance.html">Finance</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="text-gray-700">Salary Calculator</span>
+            </nav>
+        </div>
+        
+        <section class="section pt-0">
+            <div class="container-custom">
+                <div class="content-with-sidebar">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Salary Calculator</h1>
+                        <p class="text-gray-600 mb-6">Convert your annual salary to hourly, weekly, bi-weekly, and monthly rates. Includes estimated after-tax breakdown.</p>
+                        
+                        <div class="calculator-tool">
+                            <div class="form-group">
+                                <label for="salary-annual" class="form-label">Annual Salary ($)</label>
+                                <input type="number" id="salary-annual" class="form-input" placeholder="e.g., 75000" min="1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="salary-state" class="form-label">State (for tax estimation)</label>
+                                <select id="salary-state" class="form-select">
+                                    <option value="CA">California</option>
+                                    <option value="NY">New York</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="DEFAULT">Other States (5% estimate)</option>
+                                </select>
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-lg w-full" onclick="calculateSalary()">
+                                Calculate Salary
+                            </button>
+                            
+                            <div id="salary-result" class="calculator-result" style="display: none;"></div>
+                        </div>
+                        
+                        <div class="ad-placeholder ad-placeholder-horizontal my-6" data-ad-slot="in-content-1"></div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Understanding Salary Conversions</h2>
+                            <div class="prose prose-lg max-w-none text-gray-600">
+                                <p>Here's how we calculate your salary across different pay periods:</p>
+                                <ul>
+                                    <li><strong>Hourly:</strong> Annual salary ÷ 2,080 hours (40 hrs × 52 weeks)</li>
+                                    <li><strong>Weekly:</strong> Annual salary ÷ 52 weeks</li>
+                                    <li><strong>Bi-weekly:</strong> Annual salary ÷ 26 pay periods</li>
+                                    <li><strong>Monthly:</strong> Annual salary ÷ 12 months</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">How to Use This Calculator</h2>
+                            <ol class="list-decimal list-inside space-y-3 text-gray-600">
+                                <li>Enter your gross annual salary</li>
+                                <li>Select your state for more accurate tax estimates</li>
+                                <li>Click "Calculate Salary" to see your breakdown</li>
+                                <li>View your net (after-tax) income across different pay periods</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="mt-8 info-box">
+                            <h3 class="font-semibold text-gray-800 mb-2">⚠️ Disclaimer</h3>
+                            <p class="text-gray-600">Tax calculations are estimates using simplified 2024 tax brackets. For accurate tax advice, consult a tax professional.</p>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        Are these tax estimates accurate?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>These are simplified estimates using 2024 federal tax brackets and approximate state rates. Your actual taxes may vary based on deductions, filing status, and other factors. Use this as a general guide only.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        What does "gross" vs "net" mean?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Gross salary is your total pay before taxes and deductions. Net salary (also called "take-home pay") is what you actually receive after taxes are withheld.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <aside class="space-y-6">
+                        <div class="ad-placeholder ad-placeholder-sidebar" data-ad-slot="sidebar-1"></div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Related Calculators</h3>
+                            <div class="space-y-3">
+                                <a href="loan-calculator.html" class="related-card">
+                                    <div class="related-icon">💵</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Loan Calculator</p>
+                                        <p class="text-xs text-gray-500">Calculate payments</p>
+                                    </div>
+                                </a>
+                                <a href="percentage-calculator.html" class="related-card">
+                                    <div class="related-icon">%</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Percentage Calculator</p>
+                                        <p class="text-xs text-gray-500">Calculate percentages</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="main-footer"></footer>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/calculators.js"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator - Find Your Exact Age | CalcHub</title>
+    <meta name="description" content="Free Age Calculator - Find your exact age in years, months, days, weeks, and more. Also shows days until your next birthday.">
+    
+    <meta property="og:title" content="Age Calculator - Find Your Exact Age">
+    <meta property="og:description" content="Find your exact age in years, months, days, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicloud26.github.io/calcHub/calculator/age-calculator.html">
+    
+    <link rel="canonical" href="https://aicloud26.github.io/calcHub/calculator/age-calculator.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Age Calculator",
+        "description": "Calculate your exact age in years, months, and days.",
+        "url": "https://aicloud26.github.io/calcHub/calculator/age-calculator.html",
+        "applicationCategory": "UtilityApplication"
+    }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header id="main-header"></header>
+    
+    <main class="flex-1">
+        <div class="container-custom py-4">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../category/lifestyle.html">Lifestyle</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="text-gray-700">Age Calculator</span>
+            </nav>
+        </div>
+        
+        <section class="section pt-0">
+            <div class="container-custom">
+                <div class="content-with-sidebar">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Age Calculator</h1>
+                        <p class="text-gray-600 mb-6">Find your exact age down to the day, plus see when your next birthday is!</p>
+                        
+                        <div class="calculator-tool">
+                            <div class="form-group">
+                                <label for="age-birth-date" class="form-label">Date of Birth</label>
+                                <input type="date" id="age-birth-date" class="form-input" max="">
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-lg w-full" onclick="calculateAge()">
+                                Calculate Age
+                            </button>
+                            
+                            <div id="age-result" class="calculator-result" style="display: none;"></div>
+                        </div>
+                        
+                        <div class="ad-placeholder ad-placeholder-horizontal my-6" data-ad-slot="in-content-1"></div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">How Age Calculation Works</h2>
+                            <div class="prose prose-lg max-w-none text-gray-600">
+                                <p>Our age calculator determines your exact age by calculating the difference between your birth date and today's date. It accounts for leap years and varying month lengths to give you precise results.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">How to Use</h2>
+                            <ol class="list-decimal list-inside space-y-3 text-gray-600">
+                                <li>Select your date of birth using the date picker above</li>
+                                <li>Click "Calculate Age" to see your results</li>
+                                <li>View your exact age breakdown</li>
+                                <li>See how many days until your next birthday</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        How accurate is this age calculator?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>This calculator is highly accurate and accounts for leap years and varying month lengths. The results show your exact age based on the current date.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        Does the calculator include my current birthday?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Yes, once you've had your birthday this year, the calculator includes it in your age calculation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <aside class="space-y-6">
+                        <div class="ad-placeholder ad-placeholder-sidebar" data-ad-slot="sidebar-1"></div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Related Calculators</h3>
+                            <div class="space-y-3">
+                                <a href="date-difference-calculator.html" class="related-card">
+                                    <div class="related-icon">📅</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Date Calculator</p>
+                                        <p class="text-xs text-gray-500">Days between dates</p>
+                                    </div>
+                                </a>
+                                <a href="bmi-calculator.html" class="related-card">
+                                    <div class="related-icon">⚖️</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">BMI Calculator</p>
+                                        <p class="text-xs text-gray-500">Body mass index</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="main-footer"></footer>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/calculators.js"></script>
+    <script>
+        document.getElementById('age-birth-date').max = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>

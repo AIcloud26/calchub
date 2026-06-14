@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirement Calculator - Free Retirement Planning Calculator | CalcHub</title>
+    <meta name="description" content="Free Retirement Calculator - Plan for your retirement by estimating your future retirement fund and monthly retirement income.">
+    
+    <meta property="og:title" content="Retirement Calculator - Free Retirement Planning Calculator">
+    <meta property="og:description" content="Plan for your retirement and estimate your future retirement fund.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicloud26.github.io/calcHub/calculator/retirement-calculator.html">
+    
+    <link rel="canonical" href="https://aicloud26.github.io/calcHub/calculator/retirement-calculator.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Retirement Calculator",
+        "description": "Plan for retirement by estimating your future retirement fund.",
+        "url": "https://aicloud26.github.io/calcHub/calculator/retirement-calculator.html",
+        "applicationCategory": "FinanceApplication"
+    }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header id="main-header"></header>
+    
+    <main class="flex-1">
+        <div class="container-custom py-4">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../category/finance.html">Finance</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="text-gray-700">Retirement Calculator</span>
+            </nav>
+        </div>
+        
+        <section class="section pt-0">
+            <div class="container-custom">
+                <div class="content-with-sidebar">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Retirement Calculator</h1>
+                        <p class="text-gray-600 mb-6">Plan for your retirement by estimating your future retirement fund and monthly retirement income.</p>
+                        
+                        <div class="calculator-tool">
+                            <div class="form-group">
+                                <label for="retire-current-age" class="form-label">Current Age</label>
+                                <input type="number" id="retire-current-age" class="form-input" placeholder="e.g., 30" min="1" max="100">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="retire-target-age" class="form-label">Retirement Age</label>
+                                <input type="number" id="retire-target-age" class="form-input" placeholder="e.g., 65" min="1" max="100" value="65">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="retire-savings" class="form-label">Current Retirement Savings ($)</label>
+                                <input type="number" id="retire-savings" class="form-input" placeholder="e.g., 50000" min="0" value="50000">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="retire-monthly" class="form-label">Monthly Contribution ($)</label>
+                                <input type="number" id="retire-monthly" class="form-input" placeholder="e.g., 500" min="0" value="500">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="retire-return" class="form-label">Expected Annual Return (%)</label>
+                                <input type="number" id="retire-return" class="form-input" placeholder="e.g., 7" step="0.1" min="0" value="7">
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-lg w-full" onclick="calculateRetirement()">
+                                Calculate Retirement
+                            </button>
+                            
+                            <div id="retire-result" class="calculator-result" style="display: none;"></div>
+                        </div>
+                        
+                        <div class="ad-placeholder ad-placeholder-horizontal my-6" data-ad-slot="in-content-1"></div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">The 4% Rule</h2>
+                            <div class="prose prose-lg max-w-none text-gray-600">
+                                <p>Our calculator uses the "4% Rule" to estimate your monthly retirement income. This rule suggests that you can safely withdraw 4% of your retirement savings annually without running out of money for at least 30 years.</p>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4 my-4">
+                                    <p class="font-mono text-sm">Monthly Income = (Retirement Fund × 0.04) / 12</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">How to Use This Calculator</h2>
+                            <ol class="list-decimal list-inside space-y-3 text-gray-600">
+                                <li>Enter your current age and planned retirement age</li>
+                                <li>Input your current retirement savings (401k, IRA, etc.)</li>
+                                <li>Add how much you contribute monthly</li>
+                                <li>Enter your expected annual return rate</li>
+                                <li>Click "Calculate Retirement" to see your projections</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="mt-8 info-box">
+                            <h3 class="font-semibold text-gray-800 mb-2">💡 Tip</h3>
+                            <p class="text-gray-600">Start saving as early as possible. The power of compound interest means that money you save in your 20s has decades to grow.</p>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        Is the 4% rule still valid?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>The 4% rule is a guideline, not a guarantee. Some financial experts suggest being more conservative (3-3.5%) given current market conditions, while others argue 4% is still reasonable for a 30-year retirement.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <aside class="space-y-6">
+                        <div class="ad-placeholder ad-placeholder-sidebar" data-ad-slot="sidebar-1"></div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Related Calculators</h3>
+                            <div class="space-y-3">
+                                <a href="investment-calculator.html" class="related-card">
+                                    <div class="related-icon">📈</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Investment Calculator</p>
+                                        <p class="text-xs text-gray-500">Growth projections</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="main-footer"></footer>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/calculators.js"></script>
+</body>
+</html>

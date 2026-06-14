@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator - Free Online Calculator | CalcHub</title>
+    <meta name="description" content="Free Percentage Calculator - Calculate what percent a number is of another, find percentages, and calculate percent change. Multiple modes available.">
+    
+    <meta property="og:title" content="Percentage Calculator - Free Online Calculator">
+    <meta property="og:description" content="Calculate percentages, percent change, and more with our free calculator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicloud26.github.io/calcHub/calculator/percentage-calculator.html">
+    
+    <link rel="canonical" href="https://aicloud26.github.io/calcHub/calculator/percentage-calculator.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Percentage Calculator",
+        "description": "Calculate percentages, percent change, and more.",
+        "url": "https://aicloud26.github.io/calcHub/calculator/percentage-calculator.html",
+        "applicationCategory": "UtilityApplication"
+    }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header id="main-header"></header>
+    
+    <main class="flex-1">
+        <div class="container-custom py-4">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../category/math.html">Math</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="text-gray-700">Percentage Calculator</span>
+            </nav>
+        </div>
+        
+        <section class="section pt-0">
+            <div class="container-custom">
+                <div class="content-with-sidebar">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Percentage Calculator</h1>
+                        <p class="text-gray-600 mb-6">Calculate percentages in three different modes. Find what percent a number is, calculate percentage of a number, or find percent change.</p>
+                        
+                        <div class="calculator-tool">
+                            <div class="mb-6">
+                                <label class="form-label">Calculation Mode</label>
+                                <div class="toggle-group">
+                                    <button type="button" class="toggle-btn active" data-mode="what-is-x-of-y" onclick="switchPercentageMode('what-is-x-of-y')">X% of Y</button>
+                                    <button type="button" class="toggle-btn" data-mode="x-is-what-percent-of-y" onclick="switchPercentageMode('x-is-what-percent-of-y')">X is % of Y</button>
+                                    <button type="button" class="toggle-btn" data-mode="percent-change" onclick="switchPercentageMode('percent-change')">% Change</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Mode 1: What is X% of Y -->
+                            <div id="perc-section-1">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="form-group">
+                                        <label for="perc-percent" class="form-label">Percentage (%)</label>
+                                        <input type="number" id="perc-percent" class="form-input" placeholder="e.g., 15">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="perc-number" class="form-label">Number</label>
+                                        <input type="number" id="perc-number" class="form-input" placeholder="e.g., 200">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Mode 2: X is what percent of Y -->
+                            <div id="perc-section-2" style="display: none;">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="form-group">
+                                        <label for="perc-part" class="form-label">Part (X)</label>
+                                        <input type="number" id="perc-part" class="form-input" placeholder="e.g., 30">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="perc-whole" class="form-label">Whole (Y)</label>
+                                        <input type="number" id="perc-whole" class="form-input" placeholder="e.g., 150">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Mode 3: Percent Change -->
+                            <div id="perc-section-3" style="display: none;">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="form-group">
+                                        <label for="perc-old" class="form-label">Old Value</label>
+                                        <input type="number" id="perc-old" class="form-input" placeholder="e.g., 100">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="perc-new" class="form-label">New Value</label>
+                                        <input type="number" id="perc-new" class="form-input" placeholder="e.g., 120">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-lg w-full" onclick="calculatePercentage()">
+                                Calculate
+                            </button>
+                            
+                            <div id="percentage-result" class="calculator-result" style="display: none;"></div>
+                        </div>
+                        
+                        <div class="ad-placeholder ad-placeholder-horizontal my-6" data-ad-slot="in-content-1"></div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Percentage Formulas</h2>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                <h3 class="font-semibold mb-2">What is X% of Y?</h3>
+                                <p class="font-mono text-sm">Result = (X / 100) × Y</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                <h3 class="font-semibold mb-2">X is what percent of Y?</h3>
+                                <p class="font-mono text-sm">Result = (X / Y) × 100</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h3 class="font-semibold mb-2">Percent Change</h3>
+                                <p class="font-mono text-sm">Result = ((New - Old) / Old) × 100</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">How to Use</h2>
+                            <ol class="list-decimal list-inside space-y-3 text-gray-600">
+                                <li>Select your calculation mode using the toggle buttons</li>
+                                <li>Enter the required values in the input fields</li>
+                                <li>Click "Calculate" to see your result</li>
+                                <li>The formula and explanation will be displayed below</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        How do I calculate percentage increase?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Use the "% Change" mode. Enter the original value as "Old Value" and the new value as "New Value". A positive result indicates an increase, while a negative result indicates a decrease.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        What's the difference between percent and percentage?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>"Percent" is the mathematical concept (represented by the symbol %), while "percentage" is the result you get when you multiply a number by a percent. For example, 50% is a percent, and 25 is the percentage when you calculate 50% of 50.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <aside class="space-y-6">
+                        <div class="ad-placeholder ad-placeholder-sidebar" data-ad-slot="sidebar-1"></div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Related Calculators</h3>
+                            <div class="space-y-3">
+                                <a href="date-difference-calculator.html" class="related-card">
+                                    <div class="related-icon">📅</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Date Calculator</p>
+                                        <p class="text-xs text-gray-500">Days between dates</p>
+                                    </div>
+                                </a>
+                                <a href="salary-calculator.html" class="related-card">
+                                    <div class="related-icon">💵</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Salary Calculator</p>
+                                        <p class="text-xs text-gray-500">Convert salary rates</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="main-footer"></footer>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/calculators.js"></script>
+</body>
+</html>

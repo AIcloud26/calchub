@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator - Free Home Loan Calculator | CalcHub</title>
+    <meta name="description" content="Free Mortgage Calculator - Estimate your monthly mortgage payment including principal, interest, taxes, insurance, and PMI. Plan your home purchase today.">
+    
+    <meta property="og:title" content="Mortgage Calculator - Free Home Loan Calculator">
+    <meta property="og:description" content="Calculate your monthly mortgage payment including taxes and insurance.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicloud26.github.io/calcHub/calculator/mortgage-calculator.html">
+    
+    <link rel="canonical" href="https://aicloud26.github.io/calcHub/calculator/mortgage-calculator.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Mortgage Calculator",
+        "description": "Calculate monthly mortgage payments including taxes and insurance.",
+        "url": "https://aicloud26.github.io/calcHub/calculator/mortgage-calculator.html",
+        "applicationCategory": "FinanceApplication"
+    }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header id="main-header"></header>
+    
+    <main class="flex-1">
+        <div class="container-custom py-4">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="../category/finance.html">Finance</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="text-gray-700">Mortgage Calculator</span>
+            </nav>
+        </div>
+        
+        <section class="section pt-0">
+            <div class="container-custom">
+                <div class="content-with-sidebar">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Mortgage Calculator</h1>
+                        <p class="text-gray-600 mb-6">Estimate your monthly mortgage payment including principal, interest, taxes, insurance, and PMI.</p>
+                        
+                        <div class="calculator-tool">
+                            <div class="form-group">
+                                <label for="mortgage-price" class="form-label">Home Price ($)</label>
+                                <input type="number" id="mortgage-price" class="form-input" placeholder="e.g., 350000" min="1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mortgage-down" class="form-label">Down Payment ($) - Leave at 0 to use percentage</label>
+                                <input type="number" id="mortgage-down" class="form-input" placeholder="e.g., 70000" min="0" value="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mortgage-down-percent" class="form-label">Down Payment Percentage (if no dollar amount)</label>
+                                <input type="number" id="mortgage-down-percent" class="form-input" placeholder="e.g., 20" min="0" max="100" value="20">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mortgage-rate" class="form-label">Annual Interest Rate (%)</label>
+                                <input type="number" id="mortgage-rate" class="form-input" placeholder="e.g., 6.5" step="0.01" min="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mortgage-term" class="form-label">Loan Term (Years)</label>
+                                <select id="mortgage-term" class="form-select">
+                                    <option value="30">30 years</option>
+                                    <option value="20">20 years</option>
+                                    <option value="15">15 years</option>
+                                    <option value="10">10 years</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mortgage-tax" class="form-label">Annual Property Tax ($)</label>
+                                <input type="number" id="mortgage-tax" class="form-input" placeholder="e.g., 3000" min="0" value="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mortgage-insurance" class="form-label">Annual Home Insurance ($)</label>
+                                <input type="number" id="mortgage-insurance" class="form-input" placeholder="e.g., 1200" min="0" value="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mortgage-pmi" class="form-label">Monthly PMI ($) - If down payment is less than 20%</label>
+                                <input type="number" id="mortgage-pmi" class="form-input" placeholder="e.g., 150" min="0" value="0">
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-lg w-full" onclick="calculateMortgage()">
+                                Calculate Mortgage
+                            </button>
+                            
+                            <div id="mortgage-result" class="calculator-result" style="display: none;"></div>
+                        </div>
+                        
+                        <div class="ad-placeholder ad-placeholder-horizontal my-6" data-ad-slot="in-content-1"></div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Understanding Your Mortgage Payment</h2>
+                            <div class="prose prose-lg max-w-none text-gray-600">
+                                <p>Your monthly mortgage payment typically includes four components, often called PITI:</p>
+                                <ul>
+                                    <li><strong>Principal:</strong> The amount that goes toward paying down your loan balance</li>
+                                    <li><strong>Interest:</strong> The cost of borrowing money from your lender</li>
+                                    <li><strong>Taxes:</strong> Property taxes collected by your local government</li>
+                                    <li><strong>Insurance:</strong> Homeowners insurance to protect your property</li>
+                                </ul>
+                                <p class="mt-4">PMI (Private Mortgage Insurance) is required if your down payment is less than 20% of the home's value.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">How to Use This Calculator</h2>
+                            <ol class="list-decimal list-inside space-y-3 text-gray-600">
+                                <li>Enter the home price you're considering</li>
+                                <li>Input your down payment amount or percentage</li>
+                                <li>Enter the annual interest rate from your lender</li>
+                                <li>Select your loan term (30 years is most common)</li>
+                                <li>Optionally add property tax and insurance estimates</li>
+                                <li>Click "Calculate Mortgage" to see your payment breakdown</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        What is a good mortgage rate?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>Mortgage rates vary based on economic conditions, your credit score, and loan terms. As of 2024, a rate between 6-7% is considered competitive for a 30-year fixed mortgage. Always compare offers from multiple lenders.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="faq-item">
+                                    <button class="faq-question">
+                                        How much should I put down on a house?
+                                        <svg class="faq-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="faq-answer">
+                                        <p>While 20% is traditionally recommended to avoid PMI, many buyers put down less. A larger down payment means lower monthly payments and less interest paid over the life of the loan. Some loans allow as little as 3-5% down.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <aside class="space-y-6">
+                        <div class="ad-placeholder ad-placeholder-sidebar" data-ad-slot="sidebar-1"></div>
+                        
+                        <div class="bg-white rounded-xl shadow-sm p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Related Calculators</h3>
+                            <div class="space-y-3">
+                                <a href="loan-calculator.html" class="related-card">
+                                    <div class="related-icon">💵</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Loan Calculator</p>
+                                        <p class="text-xs text-gray-500">General loans</p>
+                                    </div>
+                                </a>
+                                <a href="affordability-calculator.html" class="related-card">
+                                    <div class="related-icon">🏦</div>
+                                    <div>
+                                        <p class="font-semibold text-sm">Affordability Calculator</p>
+                                        <p class="text-xs text-gray-500">How much can you afford</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="main-footer"></footer>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/calculators.js"></script>
+</body>
+</html>
